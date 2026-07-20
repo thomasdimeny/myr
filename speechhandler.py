@@ -1,11 +1,10 @@
 # speech to text handler
 import speech_recognition as sr
-
-# import pyaudio
+import pyaudio
 import ollama
 import pyttsx3
-from  commandhandler import intake_command
-from commandlibrary import playlist, commandLib
+#from  commandhandler import intake_command
+#from commandlibrary import playlist, commandLib
 
 # initialize recognizer and text to speech initialization
 # recognizer = sr.Recognizer()
@@ -13,7 +12,6 @@ myrspeech = pyttsx3.init()
 
 
 personality = "You are a helpful automaton named Myr, (prounounced meer). You speak in partial sentences with a robotic cadence and lack an understanding of many human sentiments."
-
 ollama.create(model="myr", from_="phi3", system=personality)
 for i, name in enumerate(sr.Microphone.list_microphone_names()):
     print(i, name)
@@ -23,7 +21,7 @@ def audioIntake():
     print("waiting for input:")
     recognizer = sr.Recognizer()
 
-    with sr.Microphone(device_index=1) as microphone:
+    with sr.Microphone(device_index=12) as microphone:
         recognizer.adjust_for_ambient_noise(microphone, duration=1)
         try:
             audio = recognizer.listen(microphone, timeout=5, phrase_time_limit=10)
